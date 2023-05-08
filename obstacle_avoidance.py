@@ -93,8 +93,9 @@ def callback_path(path):
    objective_y=path[0].poses.pose.position.y/0.05
    
    steering_angle=get_direction(pos_x,pos_y,objective_x,objective_y,heading)
-   
-   steer_pub.publish(steering_angle)
+   msg=Float64()
+   msg.data=steering_angle
+   steer_pub.publish(msg)
    pass
 
 def callback_cmd(cmd):
@@ -115,7 +116,7 @@ if __name__ == '__main__':
     pos_y=0
     heading=0
     rospy.init_node('obstacle_avoidance', anonymous=True)
-    steer_pub = rospy.Publisher('core/steering', Float64, queue_size=1)
+    steer_pub = rospy.Publisher('KalmanAngle', Float64, queue_size=1)
     rate = rospy.Rate(10.0)
     tfBuffer = tf2_ros.Buffer()
     listener = tf2_ros.TransformListener(tfBuffer)

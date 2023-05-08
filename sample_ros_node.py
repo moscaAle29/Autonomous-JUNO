@@ -11,6 +11,7 @@ def main_loop():
     # main loop, we define just the subscribers (non blocking functions) 
     rospy.Subscriber('<topic_to_subscribe_to>', Float64, callback_func)
     rospy.spin()
+    return
 
 if __name__ == '__main__':
     # place one-time defs here
